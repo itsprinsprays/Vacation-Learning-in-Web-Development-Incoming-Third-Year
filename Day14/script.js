@@ -43,3 +43,20 @@ function onInput() {
 }
 
 
+
+
+//Script for JS Tutorial 14.1
+
+function signIn() {
+    let username = document.querySelector("#txtEmail").value;
+    let password = document.querySelector("#txtPassword").value;
+
+    if(username === "admin" && password === "password") {
+        alert("Login Successful");
+    } else {
+        alert("Login Failed");
+    }
+}
+
+
+
