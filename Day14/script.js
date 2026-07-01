@@ -58,5 +58,21 @@ function signIn() {
     }
 }
 
+//Script for JS Tutorial 14.2
+
+
+function getCountry() {
+    let country = document.querySelector("#slcCountry").value;
+    alert("You selected: " + country);
+
+}
+
+
+//Script for JS Tutorial 14.3
+
+function sendSex() {
+    let sex = document.querySelector("input[name=sex]:checked").value;
+    alert("You selected: " + sex);
+}
 
 
