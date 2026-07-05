@@ -26,6 +26,14 @@
 
 // getPost();
 
+function dashboard() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Loading Dashboard");
+        }, 1000);
+    });
+}
+
 
 function login(){
     return new Promise((resolve, reject) => {
@@ -43,10 +51,17 @@ function login(){
     });
 }
 
+async function loadDashboard() {
+    
+    const load = await dashboard();
+    document.querySelector("#login").innerHTML = load;
+}
+
 async function start() {
     try {
         const logins = await login();
         document.querySelector("#login").innerHTML = logins;
+        loadDashboard();
     } catch(error) {
         document.querySelector("#login").innerHTML = error;
     }
