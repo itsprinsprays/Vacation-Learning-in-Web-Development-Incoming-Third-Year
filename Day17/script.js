@@ -29,18 +29,15 @@
 function dashboard() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve("Loading Dashboard");
+            resolve("Loading Dashboard...");
         }, 1000);
     });
 }
 
-
-function login(){
-    return new Promise((resolve, reject) => {
+function login(username, password){
+    return new Promise((resolve) => {
         setTimeout(() => {
 
-            let username = prompt("Enter username: ");
-            let password = prompt("Enter a password: ");
                 if(username === "Prince" && password === "12345") {
                   resolve(`Welcome ${username}!`)
               
@@ -54,14 +51,19 @@ function login(){
 async function loadDashboard() {
     
     const load = await dashboard();
-    document.querySelector("#login").innerHTML = load;
+    document.querySelector("#login").innerHTML += "<br>" + load;
 }
 
 async function start() {
     try {
-        const logins = await login();
+
+        
+        let username = prompt("Enter username: ");
+        let password = prompt("Enter a password: ");
+
+        const logins = await login(username, password);
         document.querySelector("#login").innerHTML = logins;
-        loadDashboard();
+        const load = await loadDashboard();
     } catch(error) {
         document.querySelector("#login").innerHTML = error;
     }
