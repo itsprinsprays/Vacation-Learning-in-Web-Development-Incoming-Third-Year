@@ -21,3 +21,9 @@ async function handleCreateCourse(event) {
         alert(error.message);
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("CreateCourse");
+
+    form.addEventListener("submit", handleCreateCourse);
+});
