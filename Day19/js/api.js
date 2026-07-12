@@ -11,7 +11,9 @@ async function createCourse(courseData) {
         });
 
         if(!response.ok) {
-            throw new Error("Failed to create course.")
+            const error = await response.json();
+            alert(error.message);
+            throw new Error("error.message")
         }
 
         return await response.json();

@@ -6,7 +6,7 @@ async function handleCreateCourse(event) {
         unit: document.querySelector("#unit").value
     };
 
-    try {
+    try { 
 
         const createdCourse = await createCourse(course);
 
