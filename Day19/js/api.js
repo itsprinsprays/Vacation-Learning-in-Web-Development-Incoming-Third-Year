@@ -1,10 +1,8 @@
-const API_URL = "http://localhost:8080/course/create";
-
 async function createCourse(courseData) {
 
     try {
 
-        const response = await fetch(API_URL, {
+        const response = await fetch("http://localhost:8080/course/create", {
             method: "POST",
             headers: {"Content-Type": "application/json" },
             body: JSON.stringify(courseData)
@@ -13,7 +11,7 @@ async function createCourse(courseData) {
         if(!response.ok) {
             const error = await response.json();
             alert(error.message);
-            throw new Error("error.message")
+            throw new Error(error.message)
         }
 
         return await response.json();
@@ -22,5 +20,29 @@ async function createCourse(courseData) {
     } catch(error) {
         console.error(error);
         return null;
+    }
+}
+
+async function getCourseById(courseId) {
+    try {
+
+        const response = await fetch (`http://localhost:8080/course/${courseId}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        });
+
+        if(!response.ok) {
+            const error = await response.json();
+            alert(error.message);
+            throw new Error(error.message);
+        }
+
+        return await response.json();
+
+
+
+
+    } catch (error) {
+        console.error(error);
     }
 }
