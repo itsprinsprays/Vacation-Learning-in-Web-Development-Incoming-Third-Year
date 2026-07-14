@@ -22,8 +22,29 @@ async function handleCreateCourse(event) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("CreateCourse");
+async function searchCourseById(event) {
+    event.preventDefault();
 
-    form.addEventListener("submit", handleCreateCourse);
+    const id = document.querySelector("#courseId").value;
+
+    const course = await getCourseById(id);
+
+    if(course) {
+        document.querySelector("#courseResult").innerHTML = 
+        `Course: ${course.courseName}, Units: ${course.unit}`;
+    } 
+
+    event.target.reset();
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const createForm  = document.getElementById("CreateCourse");
+
+    createForm .addEventListener("submit", handleCreateCourse);
+
+    const searchForm  = document.querySelector("#searchCourseId");
+    searchForm .addEventListener("submit", searchCourseById);
 });

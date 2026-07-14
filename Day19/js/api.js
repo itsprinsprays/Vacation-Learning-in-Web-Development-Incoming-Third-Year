@@ -33,14 +33,11 @@ async function getCourseById(courseId) {
 
         if(!response.ok) {
             const error = await response.json();
-            alert(error.message);
+            document.querySelector("#courseResult").innerHTML = error.message;
             throw new Error(error.message);
         }
 
         return await response.json();
-
-
-
 
     } catch (error) {
         console.error(error);
