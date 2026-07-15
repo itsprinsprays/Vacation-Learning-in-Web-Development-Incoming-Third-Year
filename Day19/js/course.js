@@ -38,6 +38,29 @@ async function searchCourseById(event) {
 }
 
 
+async function loadCourses() {
+    const tableBody = document.querySelector("#courseTableBody");
+
+    try {
+        const page = await getAllCourse();
+
+        tableBody.innerHTML = "";
+
+        page.content.forEach(course => {
+            tableBody.innerHTML += `
+            <tr>
+                <td>${course.courseId}</td>
+                <td>${course.courseName}</td>
+                <td>${course.unit}</td>
+                </tr>
+                `;
+        });
+
+    } catch(error) {
+    console.error(error);
+    }
+}
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,4 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const searchForm  = document.querySelector("#searchCourseId");
     searchForm .addEventListener("submit", searchCourseById);
+
+    loadCourses();
 });
