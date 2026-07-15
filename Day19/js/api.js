@@ -43,3 +43,23 @@ async function getCourseById(courseId) {
         console.error(error);
     }
 }
+
+async function getAllCourse(page = 0, size = 5) {
+    try {
+        const response = await fetch(`http://localhost:8080/course/all?page=${page}&size=${size}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        });
+
+        if(!response.ok) {
+            const error = await response.json();
+            alert(error.message);
+            throw new Error(error.message);
+        }
+
+        return await response.json();
+
+    } catch(error) {
+        console.error(error);
+    }
+}
