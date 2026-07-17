@@ -60,13 +60,72 @@ async function loadCourses() {
                 <td>${course.courseId}</td>
                 <td>${course.courseName}</td>
                 <td>${course.unit}</td>
+                <td>
+                    <button class ="updateBtn" data-id="${course.courseId}">Edit</button>
+                </td>
             </tr>
                 `;
         });
 
+        document.querySelectorAll(".updateBtn").forEach(button => {
+            button.addEventListener("click", handleEditCourse);
+        })
+
     } catch(error) {
     console.error(error);
     }
+}
+
+async function handleEditCourse(event) {
+
+    const button = event.target;
+    const row = button.closest("tr");
+
+    const nameCell = row.children[1];
+    const unitCell = row.children[2];
+
+    const currentName = nameCell.textContent;
+    const currentUnit = unitCell.textContent;
+
+    nameCell.innerHTML =
+        `<input type="text" value="${currentName}">`;
+
+    unitCell.innerHTML =
+        `<input type="number" value="${currentUnit}">`;
+
+    button.textContent = "Save";
+    button.removeEventListener("click", handleEditCourse);
+    button.addEventListener("click", handleSaveCourse);
+}
+
+async function handleSaveCourse(event) {
+
+    const button = event.target;
+    const row = button.closest("tr");
+
+    const id = button.dataset.id;
+
+    const course = {
+        courseName: row.children[1].querySelector("input").value,
+        unit: row.children[2].querySelector("input").value
+    };
+
+    try {
+
+        const updatedCourse = await updateCourseByid(id, course);
+
+        row.children[1].textContent = updatedCourse.courseName;
+        row.children[2].textContent = updatedCourse.unit;
+
+        button.textContent = "Edit";
+
+        button.removeEventListener("click", handleSaveCourse);
+        button.addEventListener("click", handleEditCourse);
+
+    } catch(error) {
+        console.error(error);
+    }
+
 }
 
 async function deleteCourseById(event) {

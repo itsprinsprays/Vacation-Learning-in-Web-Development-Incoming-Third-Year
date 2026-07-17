@@ -84,3 +84,26 @@ async function deleteCourse(courseId) {
         console.error(error);
     }
 }
+
+async function updateCourseByid(courseId, updatedData) {
+    try {
+
+        const response = await fetch(`http://localhost:8080/course/update/${courseId}`, {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(updatedData)
+        });
+
+        if(!response.ok) {
+            const error = await response.json();
+            alert(error.message);
+            throw new Error(error.message);
+        }
+
+        return await response.json();
+
+
+    } catch (error) {
+        console.error(error);
+    }
+}
