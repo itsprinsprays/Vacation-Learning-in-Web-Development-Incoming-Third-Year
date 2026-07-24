@@ -13,11 +13,19 @@ export default function Counter() {
         <h1>{count}</h1>
         <h1>{name}</h1>    
 
+       <button onClick={() => {
+            const previousCount = count - 1;
+            if(previousCount >= 1) {
+                setCount(count - 1);
+                setName(studentNames[previousCount - 1]);
+                }
+        }}> Decrease</button>
         
         <button onClick={() => {
-            if(count < studentNames.length) {
-                setCount(count + 1);
-                setName(studentNames[count]);
+            const nextCount = count + 1;
+            if(nextCount <= studentNames.length) {
+                setCount(nextCount);
+                setName(studentNames[nextCount - 1]);
             } else alert("No Student Ahead!");
         }}> Increase</button>
 
