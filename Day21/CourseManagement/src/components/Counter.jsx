@@ -2,34 +2,43 @@ import { useState } from "react";
 
 export default function Counter() {
 
-    const studentNames = ["Prince", "Jedi", "Ben", "Snirp"];
+    const students = [
+        {
+            name: "Prince", age: 21, course: "BSIT"
+        },
+        {
+            name: "John", age: 20, course: "BSCS"
+        },
+        {
+            name: "Maria", age: 22, course: "BSIS"
+        }
+    ];
 
     const [count, setCount] = useState(0);
     const [name, setName] = useState("");
+    const [age, setAge] = useState(0);
+    const [course, setCourse] = useState("");
 
     return (
         <>
 
         <h1>{count}</h1>
-        <h1>{name}</h1>    
+        <h1>Name :{name}</h1>  
+        <h1>Age : {age}</h1>    
+        <h1>Course : {course}</h1>  
 
-       <button onClick={() => {
-            const previousCount = count - 1;
-            if(previousCount >= 1) {
-                setCount(count - 1);
-                setName(studentNames[previousCount - 1]);
-                }
-        }}> Decrease</button>
+
         
         <button onClick={() => {
             const nextCount = count + 1;
-            if(nextCount <= studentNames.length) {
-                setCount(nextCount);
-                setName(studentNames[nextCount - 1]);
+            if(nextCount <= students.length) {
+                setCount(nextCount)
+                setName(students[nextCount - 1].name)
+                setAge(students[nextCount - 1].age)
+                setCourse(students[nextCount - 1].course)
             } else alert("No Student Ahead!");
         }}> Increase</button>
 
         </>
     );
-
 }
